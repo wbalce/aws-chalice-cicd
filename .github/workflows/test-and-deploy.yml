@@ -15,8 +15,9 @@ jobs:
         - uses: actions/setup-node@v3
           with:
             node-version: 14
-        - name: Install infra dependencies
+        - name: Install AWS CDK
           run: npm install -g aws-cdk
-        - name: Deploy
-          run: cdk --version
-
+        - name: Install infra dependencies
+          run: pip install -r ./infra/requirements.txt
+        - name: Synthesize a CloudFormation for stacks
+          run: cd infra && cdk synth
